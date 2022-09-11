@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import App from './base/App';
-import reportWebVitals from './reportWebVitals';
+import App from "./base/App";
+import reportWebVitals from "./reportWebVitals";
 
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from "@mui/material/CssBaseline";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>

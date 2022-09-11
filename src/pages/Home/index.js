@@ -1,11 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+
+import axios from "axios";
+import { Grid } from "@mui/material";
+
+import style from "./style.module.scss";
+import ProductCard from "../../components/ProductCard";
+
+const STATUS = {
+  SUCCESS: "success",
+  LOADING: "loading",
+  ERROR: "error",
+};
 
 const Home = () => {
-    return (
-        <div>
-            Home
-        </div>
-    )
-}
+  const [products, setProducts] = useState();
+  const [status, setStatus] = useState(STATUS.LOADING);
 
-export default Home
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const { data } = await axios.get("https://dummyjson.com/products");
+
+        setProducts(data.products);
+        setStatus(STATUS.SUCCESS);
+      } catch (e) {
+        setStatus(STATUS.ERROR);
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  if (status === STATUS.LOADING) {
+    return <div>Loading</div>;
+    // TODO IMPLEMENT LOADING
+  }
+
+  if (status === STATUS.ERROR) {
+    // TODO IMPLEMENT ERROR
+  }
+
+  return (
+    <Grid container spacing={2}>
+      {products.map((el, idx) => (
+        <Grid item key={idx} md={3} sm={4} xs={6}>
+          <ProductCard data={el} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+export default Home;
