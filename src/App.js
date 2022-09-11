@@ -1,5 +1,5 @@
-import pictureA from './a.jpg';
-import pictureB from './b.jpg';
+import pictureA from './assets/a.jpg';
+import pictureB from './assets/b.jpg';
 
 function cartItems() {
   return []
