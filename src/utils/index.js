@@ -10,9 +10,12 @@ export const formatToCurrency = (val) =>
   }).format(val);
 
 // render Jest inside context
-export const renderWithContext = (component) =>
-  render(
+export const renderWithContext = (component, stateValue) => {
+  return render(
     <BrowserRouter>
-      <CartProvider>{component}</CartProvider>
+      <CartProvider defaultState={stateValue ? stateValue : false}>
+        {component}
+      </CartProvider>
     </BrowserRouter>
   );
+};

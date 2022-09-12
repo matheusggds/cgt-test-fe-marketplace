@@ -16,8 +16,8 @@ const useCartContext = function () {
   return context;
 };
 
-export const CartProvider = ({ children }) => {
-  const [state, setState] = useState(CART_STATE);
+export const CartProvider = ({ children, defaultState }) => {
+  const [state, setState] = useState(defaultState || CART_STATE);
 
   const addItem = (item, quantityToAdd, excatQuantity) => {
     const newItems = [...state.items];
