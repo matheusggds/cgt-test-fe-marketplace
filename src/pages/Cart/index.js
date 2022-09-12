@@ -9,6 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import SelectQuantity from "../../components/SelectQuantity";
+
 import useCartContext from "../../context/cart";
 import { formatToCurrency } from "../../utils";
 import {
@@ -82,25 +84,7 @@ const Cart = () => {
                     {formatToCurrency(item.price)}
                   </TableCell>
                   <TableCell align="center">
-                    <Select
-                      labelId="cart-select-quantity"
-                      id="cart-select-quantity"
-                      value={item.quantity}
-                      onChange={(e) => quantityChange(e, item.id)}
-                      size="small"
-                      sx={{ minWidth: 65 }}
-                    >
-                      <MenuItem value={1}>1</MenuItem>
-                      <MenuItem value={2}>2</MenuItem>
-                      <MenuItem value={3}>3</MenuItem>
-                      <MenuItem value={4}>4</MenuItem>
-                      <MenuItem value={5}>5</MenuItem>
-                      <MenuItem value={6}>6</MenuItem>
-                      <MenuItem value={7}>7</MenuItem>
-                      <MenuItem value={8}>8</MenuItem>
-                      <MenuItem value={9}>9</MenuItem>
-                      <MenuItem value={10}>10</MenuItem>
-                    </Select>
+                    <SelectQuantity el={item} quantity={item.quantity} />
                   </TableCell>
                   <TableCell align="right">
                     {formatToCurrency(item.price * item.quantity)}

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Grid } from "@mui/material";
 
-import style from "./style.module.scss";
 import ProductCard from "../../components/ProductCard";
-import useCartContext from "../../context/cart";
+import Loading from "./Loading";
+import Error from "../../components/Error";
 
 const STATUS = {
   SUCCESS: "success",
@@ -33,12 +33,11 @@ const Home = () => {
   }, []);
 
   if (status === STATUS.LOADING) {
-    return <div>Loading</div>;
-    // TODO IMPLEMENT LOADING
+    return <Loading />;
   }
 
   if (status === STATUS.ERROR) {
-    // TODO IMPLEMENT ERROR
+    return <Error />;
   }
 
   return (

@@ -42,7 +42,7 @@ const ProductCard = ({ data }) => {
       </CardActionArea>
       <CardActions>
         <Button
-          onClick={() => actions.addItem(data)}
+          onClick={() => actions.addItem(data, 1)}
           size="small"
           color="primary"
           variant="outlined"

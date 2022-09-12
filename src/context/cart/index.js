@@ -19,9 +19,9 @@ const useCartContext = function () {
 export const CartProvider = ({ children }) => {
   const [state, setState] = useState(CART_STATE);
 
-  const addItem = (el, excatQuantity) => {
+  const addItem = (item, quantityToAdd, excatQuantity) => {
     const newItems = [...state.items];
-    const indexItem = newItems.findIndex((val) => el.id === val.id);
+    const indexItem = newItems.findIndex((val) => item.id === val.id);
 
     // handle quantity at cart
     if (indexItem > -1) {
@@ -31,12 +31,12 @@ export const CartProvider = ({ children }) => {
       if (excatQuantity) {
         item.quantity = excatQuantity;
       } else {
-        item.quantity += 1;
+        item.quantity += quantityToAdd;
       }
     } else {
       newItems.push({
-        ...el,
-        quantity: 1,
+        ...item,
+        quantity: quantityToAdd,
       });
     }
 

@@ -7,6 +7,8 @@ import { formatToCurrency } from "../../utils";
 
 import style from "./style.module.scss";
 import { Stack } from "@mui/system";
+import SelectQuantity from "../../components/SelectQuantity";
+import useCartContext from "../../context/cart";
 
 const STATUS = {
   SUCCESS: "success",
@@ -15,10 +17,15 @@ const STATUS = {
 };
 
 const Home = () => {
+  const { id } = useParams();
   const [productData, setProductData] = useState();
   const [status, setStatus] = useState(STATUS.LOADING);
-  const { id } = useParams();
+  const [quantityToAdd, setQuantityToAdd] = useState(0);
   const navigate = useNavigate();
+  const [_, { addItem }] = useCartContext();
+
+  // TODO set maxium to buy
+  // TODO feedback successed
 
   useEffect(() => {
     const getProducts = async () => {
@@ -36,6 +43,10 @@ const Home = () => {
 
     getProducts();
   }, []);
+
+  const AddToCart = () => {
+    addItem(productData, quantityToAdd);
+  };
 
   if (status === STATUS.LOADING) {
     return <div>Loading</div>;
@@ -55,9 +66,7 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item sm={6}>
           <Box mb={3}>
-            <image>
-              <img src={productData.images[0]} title={productData.title} />
-            </image>
+            <img src={productData.images[0]} title={productData.title} />
           </Box>
           <Button
             onClick={() => navigate(-1)}
@@ -90,9 +99,20 @@ const Home = () => {
             {formatToCurrency(productData.price)}
           </Typography>
           <Box sx={{ marginTop: "50px" }}>
-            <Button color="primary" variant="contained" fullWidth>
-              add to cart
-            </Button>
+            <Stack direction="row" spacing={3}>
+              <SelectQuantity
+                elId={id}
+                getValueChanged={(value) => setQuantityToAdd(value)}
+              />
+              <Button
+                color="primary"
+                variant="contained"
+                fullWidth
+                onClick={() => AddToCart()}
+              >
+                add to cart
+              </Button>
+            </Stack>
           </Box>
         </Grid>
       </Grid>
