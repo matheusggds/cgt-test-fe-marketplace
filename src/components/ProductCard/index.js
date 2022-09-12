@@ -16,9 +16,9 @@ import style from "./style.module.scss";
 import { formatToCurrency } from "../../utils";
 import useCartContext from "../../context/cart";
 
-const ProductCard = ({ data, addToCart }) => {
+const ProductCard = ({ data }) => {
   const { price, thumbnail, description, title, id } = data;
-  const [_, { addItem }] = useCartContext();
+  const [_, actions] = useCartContext();
 
   return (
     <Card className={style.ProductCard}>
@@ -42,7 +42,7 @@ const ProductCard = ({ data, addToCart }) => {
       </CardActionArea>
       <CardActions>
         <Button
-          onClick={() => addItem(data)}
+          onClick={() => actions.addItem(data)}
           size="small"
           color="primary"
           variant="outlined"

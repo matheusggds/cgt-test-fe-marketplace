@@ -19,15 +19,20 @@ const useCartContext = function () {
 export const CartProvider = ({ children }) => {
   const [state, setState] = useState(CART_STATE);
 
-  const addItem = (el) => {
+  const addItem = (el, excatQuantity) => {
     const newItems = [...state.items];
     const indexItem = newItems.findIndex((val) => el.id === val.id);
 
     // handle quantity at cart
     if (indexItem > -1) {
-      // check if product is already exist in the cart
+      // check if product already exist
       let item = newItems[indexItem];
-      item.quantity += 1;
+
+      if (excatQuantity) {
+        item.quantity = excatQuantity;
+      } else {
+        item.quantity += 1;
+      }
     } else {
       newItems.push({
         ...el,
@@ -41,8 +46,17 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const removeItem = (id) => {
+    const newItems = state.items.filter((el) => el.id !== id);
+
+    setState({
+      ...state,
+      items: newItems,
+    });
+  };
+
   return (
-    <CartContext.Provider value={[state, { addItem }]}>
+    <CartContext.Provider value={[state, { addItem, removeItem }]}>
       {children}
     </CartContext.Provider>
   );
