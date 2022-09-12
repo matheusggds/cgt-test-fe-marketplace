@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 
 import style from "./style.module.scss";
 import ProductCard from "../../components/ProductCard";
+import useCartContext from "../../context/cart";
 
 const STATUS = {
   SUCCESS: "success",

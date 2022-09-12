@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const CartContext = React.createContext();
 
@@ -16,8 +16,36 @@ const useCartContext = function () {
   return context;
 };
 
-export const CartProvider = ({ children }) => (
-  <CartContext.Provider value={CART_STATE}>{children}</CartContext.Provider>
-);
+export const CartProvider = ({ children }) => {
+  const [state, setState] = useState(CART_STATE);
+
+  const addItem = (el) => {
+    const newItems = [...state.items];
+    const indexItem = newItems.findIndex((val) => el.id === val.id);
+
+    // handle quantity at cart
+    if (indexItem > -1) {
+      // check if product is already exist in the cart
+      let item = newItems[indexItem];
+      item.quantity += 1;
+    } else {
+      newItems.push({
+        ...el,
+        quantity: 1,
+      });
+    }
+
+    setState({
+      ...state,
+      items: newItems,
+    });
+  };
+
+  return (
+    <CartContext.Provider value={[state, { addItem }]}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 export default useCartContext;

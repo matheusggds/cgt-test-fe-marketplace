@@ -3,4 +3,13 @@
   margin: 0 auto;
 }
 
-// TODO implement breakpoint mobile
+.topBar {
+  background: #000;
+  border-bottom: solid 1px rgb(137, 148, 245);
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+}
