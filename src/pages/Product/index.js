@@ -5,7 +5,6 @@ import { Box, Button, Chip, Divider, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatToCurrency } from "../../utils";
 
-import style from "./style.module.scss";
 import { Stack } from "@mui/system";
 import SelectQuantity from "../../components/SelectQuantity";
 import useCartContext from "../../context/cart";
@@ -24,7 +23,7 @@ const Home = () => {
   const [status, setStatus] = useState(STATUS.LOADING);
   const [quantityToAdd, setQuantityToAdd] = useState(0);
   const navigate = useNavigate();
-  const [_, { addItem }] = useCartContext();
+  const [, { addItem }] = useCartContext();
 
   // TODO set maxium to buy
   // TODO feedback successed
@@ -44,7 +43,7 @@ const Home = () => {
     };
 
     getProducts();
-  }, []);
+  }, [id]);
 
   const AddToCart = () => {
     addItem(productData, quantityToAdd);
@@ -67,7 +66,11 @@ const Home = () => {
       <Grid container spacing={2}>
         <Grid item sm={6}>
           <Box mb={3}>
-            <img src={productData.images[0]} title={productData.title} />
+            <img
+              src={productData.images[0]}
+              title={productData.title}
+              alt={productData.title}
+            />
           </Box>
           <Button
             onClick={() => navigate(-1)}

@@ -18,7 +18,7 @@ import useCartContext from "../../context/cart";
 
 const ProductCard = ({ data }) => {
   const { price, thumbnail, description, title, id } = data;
-  const [_, actions] = useCartContext();
+  const [, actions] = useCartContext();
 
   return (
     <Card className={style.ProductCard}>

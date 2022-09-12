@@ -13,28 +13,17 @@ import SelectQuantity from "../../components/SelectQuantity";
 
 import useCartContext from "../../context/cart";
 import { formatToCurrency } from "../../utils";
-import {
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const SHIPPING_FEE = 30;
 
 const Cart = () => {
-  const [{ items }, { addItem, removeItem }] = useCartContext();
+  const [{ items }, { removeItem }] = useCartContext();
   const [cartValues, setCartValues] = useState({
     subTotal: 0,
     total: 0,
   });
-
-  const quantityChange = ({ target }, id) => {
-    addItem({ id }, target.value);
-  };
 
   useEffect(() => {
     var result = items.reduce(function (acc, obj) {

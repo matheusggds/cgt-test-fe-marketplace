@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge, IconButton } from "@mui/material";
+import { Badge } from "@mui/material";
 import useCartContext from "../../context/cart";
 
 const MiniCart = () => {

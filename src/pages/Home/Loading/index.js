@@ -2,7 +2,7 @@ import { Grid, Skeleton } from "@mui/material";
 import React from "react";
 
 const Loading = () => (
-  <Grid container spacing={2}>
+  <Grid container spacing={2} data-testid="home-loading">
     {[0, 0, 0, 0, 0, 0, 0, 0].map((_, idx) => (
       <Grid item md={3} sm={4} xs={6} key={idx}>
         <Skeleton variant="rectangular" height={150} sx={{ mb: 2 }} />
