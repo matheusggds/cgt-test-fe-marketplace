@@ -55,7 +55,7 @@ const Cart = () => {
         </Box>
       ) : (
         <TableContainer component={Paper}>
-          <Table sx={{ maxWidth: 700 }}>
+          <Table sx={{ maxWidth: 700 }} role="table">
             <TableHead>
               <TableRow>
                 <TableCell align="left">Name</TableCell>
@@ -65,9 +65,9 @@ const Cart = () => {
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody role="rowgroup">
               {items.map((item) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} role="row">
                   <TableCell>{item.title}</TableCell>
                   <TableCell align="center">
                     {formatToCurrency(item.price)}

@@ -9,10 +9,6 @@ const CART_STATE = {
 const useCartContext = function () {
   const context = useContext(CartContext);
 
-  if (context === undefined) {
-    throw new Error("useCartContext must be inside a Cartcontext.Provider");
-  }
-
   return context;
 };
 
