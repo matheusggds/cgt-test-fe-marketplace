@@ -9,6 +9,8 @@ import style from "./style.module.scss";
 import { Stack } from "@mui/system";
 import SelectQuantity from "../../components/SelectQuantity";
 import useCartContext from "../../context/cart";
+import Error from "../../components/Error";
+import Loading from "./Loading";
 
 const STATUS = {
   SUCCESS: "success",
@@ -49,12 +51,11 @@ const Home = () => {
   };
 
   if (status === STATUS.LOADING) {
-    return <div>Loading</div>;
-    // TODO IMPLEMENT LOADING
+    return <Loading />;
   }
 
   if (status === STATUS.ERROR) {
-    // TODO IMPLEMENT ERROR
+    return <Error />;
   }
 
   return (
