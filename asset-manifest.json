@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/cgt-test-fe-marketplace/static/css/main.8b5561c7.css",
-    "main.js": "/cgt-test-fe-marketplace/static/js/main.ca407677.js",
+    "main.js": "/cgt-test-fe-marketplace/static/js/main.75d2304c.js",
     "static/js/787.c23b093c.chunk.js": "/cgt-test-fe-marketplace/static/js/787.c23b093c.chunk.js",
     "index.html": "/cgt-test-fe-marketplace/index.html",
     "main.8b5561c7.css.map": "/cgt-test-fe-marketplace/static/css/main.8b5561c7.css.map",
-    "main.ca407677.js.map": "/cgt-test-fe-marketplace/static/js/main.ca407677.js.map",
+    "main.75d2304c.js.map": "/cgt-test-fe-marketplace/static/js/main.75d2304c.js.map",
     "787.c23b093c.chunk.js.map": "/cgt-test-fe-marketplace/static/js/787.c23b093c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8b5561c7.css",
-    "static/js/main.ca407677.js"
+    "static/js/main.75d2304c.js"
   ]
 }
