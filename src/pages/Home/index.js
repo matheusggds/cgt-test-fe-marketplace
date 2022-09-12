@@ -22,8 +22,6 @@ const Home = () => {
       try {
         const { data } = await axios.get("https://dummyjson.com/products");
 
-        console.log("########", data);
-
         setProducts(data.products);
         setStatus(STATUS.SUCCESS);
       } catch (e) {

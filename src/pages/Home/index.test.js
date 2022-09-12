@@ -1,4 +1,10 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { renderWithContext } from "../../utils";
 
 import axios from "axios";
@@ -31,13 +37,50 @@ const MOCK = {
 };
 
 describe("<Home />", () => {
-  it("should display products", async () => {
-    axios.get.mockReturnValue(Promise.resolve({ data: MOCK }));
+  describe("View", () => {
+    it("should display products correctly", async () => {
+      axios.get.mockReturnValue(Promise.resolve({ data: MOCK }));
 
-    renderWithContext(<Home />);
+      const products = renderWithContext(<Home />);
 
-    await screen.findByText("title A");
+      await screen.findByText("title A");
 
-    screen.debug();
+      expect(products).toMatchSnapshot();
+    });
+
+    it("should display loading screen", async () => {
+      axios.get.mockReturnValue(Promise.resolve({ data: MOCK }));
+
+      renderWithContext(<Home />);
+
+      await waitFor(() => {
+        expect(screen.getByTestId("home-loading")).toBeInTheDocument();
+      });
+    });
+
+    it("should display error screen", async () => {
+      axios.get.mockReturnValue(Promise.reject());
+
+      renderWithContext(<Home />);
+
+      await waitFor(() => {
+        expect(
+          screen.getByText("Oops! We have a error, try again later")
+        ).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("Requests", () => {
+    it("should call API to get products", async () => {
+      axios.get.mockReturnValue(Promise.resolve({ data: MOCK }));
+
+      renderWithContext(<Home />);
+
+      waitFor(() => {
+        expect(axios.get).toHaveBeenCalled();
+        expect(axios.get).toHaveBeenCalledTimes(1);
+      });
+    });
   });
 });

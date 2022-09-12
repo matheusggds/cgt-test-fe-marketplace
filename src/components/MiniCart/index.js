@@ -9,8 +9,6 @@ const MiniCart = () => {
   const [itemLength, setItemsLength] = useState(items.length);
 
   useEffect(() => {
-    console.log(items);
-
     let totalItems = items.reduce(function (acc, obj) {
       return acc + obj.quantity;
     }, 0);
@@ -24,6 +22,7 @@ const MiniCart = () => {
       color="primary"
       badgeContent={itemLength}
       showZero
+      data-testid="minicart-badge"
     >
       <ShoppingCartIcon />
     </Badge>
