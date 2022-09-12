@@ -1,4 +1,10 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { renderWithContext } from "../../utils";
 import ProductCard from "./";
 
@@ -16,6 +22,28 @@ describe("<ProductCart />", () => {
       const productCard = renderWithContext(<ProductCard data={MOCK_CARD} />);
 
       expect(productCard).toMatchSnapshot();
+    });
+
+    it("should display success message and hide it", async () => {
+      renderWithContext(<ProductCard data={MOCK_CARD} />);
+
+      const buyButton = screen.getByRole("button");
+
+      fireEvent.click(
+        buyButton,
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText("Added to cart")).toBeInTheDocument();
+      });
+
+      await waitForElementToBeRemoved(screen.queryByText("Added to cart"), {
+        timeout: 4000,
+      });
     });
   });
 });

@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
-import { Box, Button, Chip, Divider, Grid, Typography } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  Chip,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { useParams } from "react-router-dom";
 import { formatToCurrency } from "../../utils";
 
 import { Stack } from "@mui/system";
@@ -15,6 +23,7 @@ const STATUS = {
   SUCCESS: "success",
   LOADING: "loading",
   ERROR: "error",
+  ADDED_TO_CART: "added_to_cart",
 };
 
 const Home = () => {
@@ -22,11 +31,7 @@ const Home = () => {
   const [productData, setProductData] = useState();
   const [status, setStatus] = useState(STATUS.LOADING);
   const [quantityToAdd, setQuantityToAdd] = useState(0);
-  const navigate = useNavigate();
   const [, { addItem }] = useCartContext();
-
-  // TODO set maxium to buy
-  // TODO feedback successed
 
   useEffect(() => {
     const getProducts = async () => {
@@ -46,7 +51,13 @@ const Home = () => {
   }, [id]);
 
   const AddToCart = () => {
-    addItem(productData, quantityToAdd);
+    addItem(productData, quantityToAdd, null, () => {
+      setStatus(STATUS.ADDED_TO_CART);
+
+      setTimeout(() => {
+        setStatus(STATUS.SUCCESS);
+      }, 3000);
+    });
   };
 
   if (status === STATUS.LOADING) {
@@ -72,14 +83,6 @@ const Home = () => {
               alt={productData.title}
             />
           </Box>
-          <Button
-            onClick={() => navigate(-1)}
-            color="info"
-            variant="outlined"
-            size="small"
-          >
-            Back to products
-          </Button>
         </Grid>
         <Grid item sm={6}>
           <div>
@@ -106,6 +109,7 @@ const Home = () => {
             <Stack direction="row" spacing={3}>
               <SelectQuantity
                 elId={id}
+                quantity={quantityToAdd}
                 getValueChanged={(value) => setQuantityToAdd(value)}
               />
               <Button
@@ -117,6 +121,11 @@ const Home = () => {
                 add to cart
               </Button>
             </Stack>
+          </Box>
+          <Box sx={{ mt: 3 }}>
+            {status === STATUS.ADDED_TO_CART && (
+              <Alert severity="success">Added to cart</Alert>
+            )}
           </Box>
         </Grid>
       </Grid>

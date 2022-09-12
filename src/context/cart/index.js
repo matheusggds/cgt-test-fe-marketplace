@@ -15,7 +15,7 @@ const useCartContext = function () {
 export const CartProvider = ({ children, defaultState }) => {
   const [state, setState] = useState(defaultState || CART_STATE);
 
-  const addItem = (item, quantityToAdd, excatQuantity) => {
+  const addItem = (item, quantityToAdd, excatQuantity, successCallback) => {
     const newItems = [...state.items];
     const indexItem = newItems.findIndex((val) => item.id === val.id);
 
@@ -40,6 +40,8 @@ export const CartProvider = ({ children, defaultState }) => {
       ...state,
       items: newItems,
     });
+
+    successCallback && successCallback();
   };
 
   const removeItem = (id) => {
